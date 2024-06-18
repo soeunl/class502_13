@@ -15,15 +15,19 @@ import java.util.List;
 @WebServlet("/board/list/*")
 public class BoardListController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         BoardInfoService service = new BoardInfoService();
         List<BoardData> items = service.getList();
 
         req.setAttribute("items", items);
 
-        RequestDispatcher rd = req.getRequestDispatcher
-                ("/WEB-INF/templates/board/list.jsp");
+        req.setAttribute("addCss", new String[] { "board/style", "board/list"});
+        req.setAttribute("addScript", List.of("board/common", "board/list"));
+
+        // 속성 설정은 RequestDispatcher 상단에 정의
+        // 출력 완료 되면 속성은 반영 X
+        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/templates/board/list.jsp");
         rd.forward(req, resp);
     }
 }
