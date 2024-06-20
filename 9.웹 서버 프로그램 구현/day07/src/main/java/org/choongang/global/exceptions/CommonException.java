@@ -1,9 +1,6 @@
 package org.choongang.global.exceptions;
 
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.net.http.HttpResponse;
 
 public class CommonException extends RuntimeException{
 
