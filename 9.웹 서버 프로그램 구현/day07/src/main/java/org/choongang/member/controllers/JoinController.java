@@ -13,6 +13,7 @@ import org.choongang.member.services.MemberServiceProvider;
 import java.io.IOException;
 
 import static org.choongang.global.MessageUtil.alertError;
+import static org.choongang.global.MessageUtil.go;
 
 @WebServlet("/member/join")
 public class JoinController extends HttpServlet {
@@ -29,6 +30,9 @@ public class JoinController extends HttpServlet {
        // 서비스를 넣어서 처리
         try {JoinService service = MemberServiceProvider.getInstance().joinService();
         service.process(req); // 요청데이터가 req에 들어 있다
+
+            go(req.getContextPath() + "/member/login", "parent", resp);
+            //resp.sendRediret(req.getContextPath() + "/member/login");
         } catch (CommonException e) {
             alertError(e, resp);
         }

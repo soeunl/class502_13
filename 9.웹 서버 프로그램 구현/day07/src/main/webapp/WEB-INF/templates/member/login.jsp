@@ -5,7 +5,7 @@
 
 <layout:main title="로그인">
     <h2>❤로그인❤</h2>
-    <form method="POST" action="${actionUrl}" autocomplete="off">
+    <form method="POST" action="${actionUrl}" autocomplete="off" target="ifrmProcess">
         <dl>
             <dt>이메일</dt>
             <dd>
