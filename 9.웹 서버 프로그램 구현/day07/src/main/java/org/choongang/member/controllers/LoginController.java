@@ -40,13 +40,13 @@ public class LoginController extends HttpServlet {
             // 예외가 발생하면 하단 코드가 실행됨
 
             /* 이메일 기억하기 처리S */
-            String email = req.getParameter("email");
+            String email = req.getParameter("email"); // req 로부터 "email"이라는 이름의 요청 파라미터 값을 가져옴
             Cookie cookie = new Cookie("saveEmail", email);
             
             if (req.getParameter("saveEmail") != null) { // 이메일 기억하기가 체크 되어있다면
                 cookie.setMaxAge(60 * 60 * 24 * 7); // 7일간 쿠키가 기억됨
             } else { // 체크 해제되면 -> 쿠키가 제거
-                cookie.setMaxAge(0);
+                cookie.setMaxAge(0); // 쿠키의 만료 시간을 설정
             }
             resp.addCookie(cookie);
             /* 이메일 기억하기 처리E */
