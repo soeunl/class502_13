@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="util" tagdir="/WEB-INF/tags/utils" %>
 <c:url var="loginUrl" value="/member/login" />
 <c:url var="joinUrl" value="/member/join" />
 <c:url var="logoutUrl" value="/member/logout" />

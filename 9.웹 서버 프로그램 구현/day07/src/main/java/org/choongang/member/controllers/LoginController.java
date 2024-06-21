@@ -3,6 +3,7 @@ package org.choongang.member.controllers;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -36,6 +37,19 @@ public class LoginController extends HttpServlet {
             LoginService service = MemberServiceProvider.getInstance().loginService(); // MemberServiceProvider 클래스를 통해 LoginService 객체를 가져옴
             service.process(req); // LoginService 객체의 process(req) 메서드를 호출하여 로그인 로직을 수행함
             // req 객체에는 클라이언트가 입력한 로그인 정보가 담겨 있음
+            // 예외가 발생하면 하단 코드가 실행됨
+
+            /* 이메일 기억하기 처리S */
+            String email = req.getParameter("email");
+            Cookie cookie = new Cookie("saveEmail", email);
+            
+            if (req.getParameter("saveEmail") != null) { // 이메일 기억하기가 체크 되어있다면
+                cookie.setMaxAge(60 * 60 * 24 * 7); // 7일간 쿠키가 기억됨
+            } else { // 체크 해제되면 -> 쿠키가 제거
+                cookie.setMaxAge(0);
+            }
+            resp.addCookie(cookie);
+            /* 이메일 기억하기 처리E */
 
             go(req.getContextPath() + "/", "parent", resp); // 로그인 처리가 성공하면 go 메서드를 호출하여 메인 페이지로 이동
 

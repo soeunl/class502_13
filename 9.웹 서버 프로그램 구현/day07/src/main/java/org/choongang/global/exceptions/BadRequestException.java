@@ -9,7 +9,7 @@ public class BadRequestException extends CommonException {
 
     public BadRequestException () {
         this("잘못된 요청입니다");
-    }
+    } // 기본값을 넣어주기 위한 처리임
 
     public BadRequestException(String message) {
         super(message, HttpServletResponse.SC_BAD_REQUEST);
@@ -18,6 +18,6 @@ public class BadRequestException extends CommonException {
 
 // CommonException 클래스를 상속받음
 // 기본 생성자와 메세지를 포함하는 생성자 2가지의 생성자가 있음
-// 문자열 message 를 매개 변수로 받는 생성자는 받은 message 를 예외 메시지로 설정함
-// super 키워드를 통해 상속받은 클래스(CommonException)의 생성자를 호출할 수 있음
+// 문자열 message 를 매개 변수로 받는 생성자는 받은 message를 예외 메시지로 설정함
+// super 키워드를 통해 상속받은 클래스(CommonException)의 생성자를 호출
 // HttpServletResponse.SC_BAD_REQUEST는 HTTP 상태 코드 400 (Bad Request)을 나타냄
