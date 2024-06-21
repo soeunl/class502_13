@@ -4,11 +4,16 @@
 <c:url var="joinUrl" value="/member/join" />
 <c:url var="logoutUrl" value="/member/logout" />
 
-<c:if test="${sessionScope.member == null}">
+로그인 상태 : ${isLogin} <br>
+
+<%--미로그인 상태--%>
+<util:GuestOnly>
     <h2><a href="${loginUrl}">❤로그인❤</a></h2>
     <h2><a href="${joinUrl}">❤회원가입❤</a></h2>
-</c:if>
-<c:if test="${sessionScope.member != null}">
-    ${sessionScope.member.userName}(${sessionScope.member.email})님 로그인❤
+</util:GuestOnly>
+
+<%--로그인 상태--%>
+<util:MemberOnly>
+    ${loggedMember.userName}(${loggedMember.email})님 로그인❤
     <h2><a href="${logoutUrl}">❤로그아웃❤</a></h2>
-</c:if>
+</util:MemberOnly>
