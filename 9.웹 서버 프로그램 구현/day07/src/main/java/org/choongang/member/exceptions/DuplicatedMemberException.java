@@ -7,3 +7,5 @@ public class DuplicatedMemberException extends BadRequestException {
         super("이미 가입된 회원입니다");
     }
 }
+
+// BadRequestException을 상속받음
