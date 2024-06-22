@@ -21,35 +21,38 @@ public class JoinService {
         this.mapper = mapper;
     }
 
-    // 들어오는 값으로 다른 처리를 위해 오버로드를 함
 
+    // 생성된 RequestJoin 객체는 process(RequestJoin form) 메서드로 전달되어 유효성 검사, 비밀번호 해시화, 데이터 저장 등의 로직 수행
     public void process(RequestJoin form) {
 
         // 유효성 검사
-        validator.check(form);
+        validator.check(form); // validator여도 RequestJoin form으로 인해 JoinValidator의 check 메서드가 호출됨
 
         // 비밀번호 해시화
         String hash = BCrypt.hashpw(form.getPassword(), BCrypt.gensalt(12));
+        // BCrypt = 비밀번호를 해시화하는 알고리즘
+        // BCrypt 라이브러리의 gensalt 함수를 사용하여 12길이의 해시코드 생성..?
 
-        Member member = new Member();
+        Member member = new Member(); // 새로운 Member 객체를 만들어 데이터베이스에 저장
         member.setEmail(form.getEmail());
         member.setPassword(hash);
         member.setUserName(form.getUserName());
 
-        int result = mapper.register(member);
-        if(result < 1) {
+        int result = mapper.register(member); // 저장된 레코드의 수를 result에 저장
+        if(result < 1) { // 저장된 레코드의 수가 1보다 작으면 실패
             throw new BadRequestException("회원가입에 실패했습니다");
-        }
+        } // 
     }
 
+    // HTTP 요청 데이터를 기반으로 RequestJoin 객체를 생성
     public void process(HttpServletRequest request) {
 
         // Object.requiredNonNullElse(객체, null일때 기본값);
-
-        String _termsAgree = Objects.requireNonNullElse(request.getParameter("termsAgree"), "false");
-        boolean termsAgree = Boolean.parseBoolean(_termsAgree);
+        String _termsAgree = Objects.requireNonNullElse(request.getParameter("termsAgree"), "false"); // 요청 파라미터 중 필수값인 termsAgree를 가지고 오고, 파라미터가 없는 경우 기본값 false를 사용
+        boolean termsAgree = Boolean.parseBoolean(_termsAgree); // 얻어온 termsAgree 값을 Boolean.parseBoolean 메서드를 이용하여 boolean으로 변환
 
         RequestJoin form = RequestJoin.builder()
+                // RequestJoin.builder를 이용하여 빌더 패턴으로 RequestJoin 객체를 생성
                 // 요청 데이터가 들어오면 DTO로 변환 작업 중
                 .email(request.getParameter("email"))
                 .password(request.getParameter("password"))
@@ -57,8 +60,9 @@ public class JoinService {
                 .userName(request.getParameter("userName"))
                 .termsAgree(termsAgree)
                 .build();
+                // request.getParameter 메서드를 이용하여 이메일, 비밀번호, 비밀번호 확인, 사용자 이름, 약관 동의 여부 등의 정보를 가져와 RequestJoin 객체의 필드에 설정
 
-        process(form);
+        process(form); // 생성된 RequestJoin 객체를 파라미터로 하여 같은 클래스 내의 process(RequestJoin form) 메서드를 호출
 
     }
 }

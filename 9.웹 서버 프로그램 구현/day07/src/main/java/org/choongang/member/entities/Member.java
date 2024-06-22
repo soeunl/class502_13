@@ -13,3 +13,4 @@ public class Member {
     private LocalDateTime regDt;
     private LocalDateTime modDt;
 }
+// 데이터베이스 테이블과 변수 매핑하기 위함
