@@ -5,7 +5,6 @@ import org.choongang.global.validators.EmailValidator;
 import org.choongang.global.validators.RequiredValidator;
 import org.choongang.global.validators.Validator;
 import org.choongang.member.controllers.RequestJoin;
-import org.choongang.member.entities.Member;
 import org.choongang.member.exceptions.DuplicatedMemberException;
 import org.choongang.member.mapper.MemberMapper;
 
@@ -52,7 +51,7 @@ public class JoinValidator implements Validator<RequestJoin>, RequiredValidator,
         checkTrue(password.length() >= 8, new BadRequestException("비밀번호는 8자리 이상 입력하세요"));
         // checked 값이 false 일 경우 e 객체를 throw 하여 예외를 발생
 
-        //이미 가입된 회원인지 체크
+        // 이미 가입된 회원인지 체크
         // 해당 이메일로 이미 가입된 회원이 있는지 확인
         checkTrue(mapper.exist(email) == 0L, new
                 DuplicatedMemberException()); // 반환된 회원수가 0인지 확인. 반환값이 0이 아니라면 예외가 발생함
