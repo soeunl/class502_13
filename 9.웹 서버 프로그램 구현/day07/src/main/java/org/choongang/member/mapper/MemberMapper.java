@@ -7,3 +7,5 @@ public interface MemberMapper {
     Member get(String email);
     int register(Member member);
 }
+
+// MemberMapper.xml에 정의한 쿼리문 사용을 위해 인터페이스에 추상메서드 형태로 정의함

@@ -25,7 +25,9 @@ public class Ex01 {
             } else if (clz == LocalDateTime.class) { // setter 메서드의 매개변수가 LocalDateTime
                 arg = LocalDateTime.now();
             }
+//            obj.setUserId("문자열");
 
+//          obj.method(arg..);
             method.invoke(obj, arg); // setter 메서드 호출
         }
 

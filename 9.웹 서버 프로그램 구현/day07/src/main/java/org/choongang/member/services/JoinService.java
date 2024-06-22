@@ -45,6 +45,7 @@ public class JoinService {
     public void process(HttpServletRequest request) {
 
         // Object.requiredNonNullElse(객체, null일때 기본값);
+        // 매개변수가 유효한지 검사하라 .requireNonNullElse
 
         String _termsAgree = Objects.requireNonNullElse(request.getParameter("termsAgree"), "false");
         boolean termsAgree = Boolean.parseBoolean(_termsAgree);

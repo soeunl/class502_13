@@ -26,8 +26,8 @@ public class JoinController extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 회원가입 페이지를 보여주는 역할
         RequestDispatcher rd = req.getRequestDispatcher
-                ("/WEB-INF/templates/member/join.jsp"); // join.jsp를 가져오기 위한 RequestDispatcher 객체를 생성 (버퍼 치환)
-        rd.forward(req, resp); // 요청 정보와 응답 정보를 활용해 forward 메서드를 호출하여 페이지를 바꿈
+                ("/WEB-INF/templates/member/join.jsp"); // join.jsp를 가져오기 위한 RequestDispatcher 객체를 생성
+        rd.forward(req, resp); // 요청 정보와 응답 정보를 활용해 forward 메서드를 호출하여 페이지를 바꿈 (버퍼 치환)
     }
 
     @Override
