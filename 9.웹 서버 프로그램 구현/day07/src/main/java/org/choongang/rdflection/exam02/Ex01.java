@@ -32,6 +32,7 @@ public class Ex01 {
 
 //          obj.method(arg..);
             method.invoke(obj, arg); // setter 메서드 호출
+            // invoke는 일반적으로 메서드 호출을 의미하며, 주로 객체의 메서드를 호출하는 것을 뜻하지만, 리플렉션을 사용하여 동적으로 메서드를 호출할때도 사용
         }
 
         System.out.println(obj);
