@@ -29,19 +29,21 @@ public class JoinService {
         validator.check(form); // validator여도 RequestJoin form으로 인해 JoinValidator의 check 메서드가 호출됨
 
         // 비밀번호 해시화
+        // hashpw 메서드는 비밀번호와 salt를 매개변수로 받아서 비밀번호로 만듬, gensalt는 12바이트로 끊어서 비밀번호를 해시화
         String hash = BCrypt.hashpw(form.getPassword(), BCrypt.gensalt(12));
-        // BCrypt = 비밀번호를 해시화하는 알고리즘
-        // BCrypt 라이브러리의 gensalt 함수를 사용하여 12길이의 해시코드 생성..?
+        // BCrypt = 비밀번호를 해시화하는 알고리즘, 사용하려면 의존성 추가 필요, JBCrypt
 
-        Member member = new Member(); // 새로운 Member 객체를 만들어 데이터베이스에 저장
+        Member member = new Member(); // 사용자 입력값으로 새로운 Member 객체를 만드는 과정 (register 쿼리 실행을 위해 필요)
         member.setEmail(form.getEmail());
         member.setPassword(hash);
         member.setUserName(form.getUserName());
 
-        int result = mapper.register(member); // 저장된 레코드의 수를 result에 저장
+        int result = mapper.register(member); // 위에서 생성된 member 객체로 register 쿼리 실행하여 데이터베이스에 값 넣기
+        // 저장된 레코드의 수를 result에 저장
+
         if(result < 1) { // 저장된 레코드의 수가 1보다 작으면 실패
             throw new BadRequestException("회원가입에 실패했습니다");
-        } // 
+        } // 회원가입이 됐으면 통과, 안됐으면 예외처리.
     }
 
     // HTTP 요청 데이터를 기반으로 RequestJoin 객체를 생성

@@ -31,7 +31,7 @@ public class Ex01 {
                     :
                     constructor.newInstance(arguments.toArray()); // 만약 비어있지 않다면 (생성자가 매개변수를 가지는 경우) arguments.toArray() 메서드를 이용하여 리스트를 배열로 변환한 후 constructor.newInstance(arguments.toArray()) 메서드를 호출하여 생성자를 호출하고 결과 객체를 obj 변수에 저장
 
-            JoinService service = (JoinService) obj; // obj 변수에 담긴 객체를 JoinService 타입으로 캐스팅하여 service 변수에 저장
+            JoinService service = (JoinService) obj; // obj 변수에 담긴 객체를 JoinService 타입으로 변환하여 service 변수에 저장
             System.out.println(service); // service 변수에 담긴 객체 정보를 출력
         }
 
